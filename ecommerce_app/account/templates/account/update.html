@@ -1,0 +1,32 @@
+{% load static %}
+{% load crispy_form_tag %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update User</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+</head>
+
+{% block content %}
+<body>
+  <div class="header">
+    {{ account.user.username }}
+  </div>
+  <div class="update-header">
+    <h3>Update User</h3>
+    <div class="update-container">
+      <form action="" method="PUT" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ update_form|crispy }}
+        <button type="submit" class="btn update-btn">
+          Update User
+        </button>
+      </form>
+    </div>
+  </div>
+  <a href="{% url 'account:home' %}">Return to Home</a>
+</body>
+</html>
+{% endblock %}

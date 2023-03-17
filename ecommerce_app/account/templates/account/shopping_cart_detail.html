@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Shopping Cart Detail  {{ object.shopping_id }}</title>
+</head>
+{% block content %}
+<body>
+  <div class="data-detail">
+    <div>
+      <h3>{{ object.account.user.username }}</h3>
+      <p>{{ object.products.name }}</p>
+      <p>{{ object.products.price }}</p>
+      <p>{{ object.products.category }}</p>
+      <a href="{% url 'product:update' object.pk %}">
+        Update Product
+      </a>
+    </div>
+  </div>
+  <a href="{% url 'account:shopping-cart-list' %}">Return Home</a>
+</body>
+{% endblock %}
+</html>
+

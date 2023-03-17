@@ -1,0 +1,56 @@
+{% load static %}
+{% load crispy_form_tags %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Details - {{  }}</title>
+  <link rel="stylesheet" type="text/css" href="{%  static 'styles/main.css' %}">
+</head>
+
+{% block content %}
+<body>
+  {% if no_data %}
+    <div class="alert alert-danger" id="alert-box" role="alert">
+        {{ no_data }}
+    </div>
+  {% endif %}
+
+<div>
+  <h5>Search for Products</h5>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ product_search_form|crispy }}
+  </form>
+</div>
+
+<div class="product-data">
+  {% if product_data %}
+    <h2>{{ product_data.name }}</h2>
+    <img src="{% single_product_image %}" alt="{{ product_data.name }}" />
+    <h3>{{ product.description }}</h3>
+    <p>{{ product_data.category }}</p> |
+    <p>{{ product_data.price }}</p>
+    <a href="{% url 'buy:product' product_data.id %}">
+        Purchase Product
+    </a>
+    <div class="slide-container">
+      <div class="slide-child">
+        {% for img in multiple_product_image %}
+          <img src="{% img %}" alt="{{ product_data.name }}" />
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+</body>
+</html>
+
+{% endblock  %}

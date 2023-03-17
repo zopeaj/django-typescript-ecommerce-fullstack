@@ -1,0 +1,116 @@
+E-shopping-Application
+Customer
+  id:
+  name
+  email
+  password:
+  address
+  cart_id
+  cart
+
+Address
+  id
+  street
+  streetNumber
+  zipCode
+  city:
+  country
+  phone
+  billingAddress
+  devliveryAddress
+
+Cart
+  id
+  products:
+
+Item
+  id
+  quantity:
+  price
+
+Product
+  id
+  description
+  price:
+  manufacturer
+
+Order
+  orderId
+  orderDate:
+  sum: double
+
+Bill
+  issuedDate
+  dueDate
+  sum
+
+OrderStatus
+  new
+  processing
+  shipping
+  delivered
+  canceled
+
+ShoppingCart Service
+  update(items: )
+  remove(items: )
+  purchase(): Order
+
+
+
+
+
+
+
+
+
+
+user = User.objects.create(email='david@example.com', first_name='daniel', last_name='kelvin', password='1234adas', username='mathtew')
+product = Product.objects.create(name='', price=123.23)
+order = Order.objects.create(product=product)
+shopping_cart = ShoppingCart.objects.create(products=product)
+account = Account.objects.create(user, age=34, avatar=None, orders=order, shopping_cart=shopping_cart)
+
+serializer = AccountSerializer(instance=account)
+serializer.is_valid()
+serializer.save()
+serializer.data
+
+
+
+
+data = {
+    'account': {
+        'user': {
+            'username': 'admin',
+            'last_name': 'david',
+            'email': 'admin@example.com'
+        },
+        'age': 23,
+        'avatar': '/media/imag_url/',
+    },
+    'orders': [
+        {
+            'id': 1,
+            'products': [
+                { 'name': 'iron', 'categories': 'electronics', 'price': 200 }
+            ]
+        },
+        {
+            'id': 2,
+            'products': [
+                { 'name': 'bed', 'categories': 'furniture', 'price': 400 }
+            ]
+        }
+    ],
+    'shopping_cart': [
+        { 'id': 1,
+        'products': [ { 'name': 'iron', 'categories': 'electronics', 'price': 200 } ], 'selected': True},
+
+        { 'id': 2, 'products': [ { 'name': 'biscuit', 'categories': 'beverages', 'price': 200 } ], 'selected': False},
+
+        {'id'}
+    ]
+}
+
+

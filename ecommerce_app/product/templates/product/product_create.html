@@ -1,0 +1,48 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Create View</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+</head>
+<body>
+
+  {% if user.is_authenticated %}
+    <div class="header-login">
+      <div class="header-logo">
+        App Logo
+      </div>
+      <div class="right-side-button">
+          <a href="{% url 'ecommerce:logout' %}">Logout</a>
+      </div>
+    </div>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% form %}
+      <button type="submit">Create Product</button>
+    </form>
+
+    <div>
+      <p><a href="{% url 'account:home' %}">Return to home</a></p>
+    </div>
+  {% else %}
+  <div class="header-logout">
+    <div class="App logo">
+      App Logo
+    </div>
+    <div class="right-side-button">
+      <a href="{% url 'ecommerce:login' %}">Login</a>
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>
+
+{% end block %}

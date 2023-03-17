@@ -1,0 +1,42 @@
+{% load static %}
+{% load crispy_form tags %}
+{% load crispy_forms %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Update - {{ product.name }} - {{ product.category }}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+</head>
+<body>
+  {% if user.is_authenticated %}
+    <h1>{{ product.name }}</h1>-<span>{{ product.category }}</span>
+    <form action="" method="PUT" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+    <div class="upload-multiple">
+      <button type="button" class="btn">
+        <span class="upload button">Upload Photos</span>
+      </button>
+      <div>
+        <input id="filesupload" type="file" name="file" multiple data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}' />
+      </div>
+    </div>
+    <div class="drag-drop-contained">
+      <h3>Drop photos here to upload</h3>
+    </div>
+  {% else %}
+    <div class="redirect-home">
+      <a href="{% url 'ecommerce:home' %}">Return Home</a>
+    </div>
+  {% endif %}
+
+</body>
+</html>
+
+{% endblock %}
