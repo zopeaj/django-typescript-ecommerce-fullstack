@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from product.models import ProductUploadImag
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import get_template
-
+from django.views import generic
+from django.utils import timezone
 
 # Create your views here.
 
@@ -68,3 +69,20 @@ def render_data_view(request, pk):
     response['Content-Disposition'] = 'filename="image_file.jpeg"'
     template = get_template(template_path)
     html = template.render(context)
+
+class IndexView(generic.ListView):
+    template_name = 'products/index.html'
+    context_object_name = 'product_data_list'
+
+    def get_queryset(self):
+        return  Product.objects.filter(
+            created__lte=timezone.now()
+        )
+        order_by('-created')[:5]
+
+
+class DetailView(generic.DetailView):
+    def get_queryset(self):
+        return Product.objects.filter(created=timezone.now())
+
+

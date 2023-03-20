@@ -10,5 +10,6 @@ if (env === 'production') {
   envApiUrl = `http://${process.env.TYPESCRIPTREACT_APP_DOMAIN_DEV}`;
 }
 
-export const apiUrl = envApiUrl;
+export const API_URL = envApiUrl;
 export const appName = process.env.TYPESCRIPTREACT_APP_NAME;
+
